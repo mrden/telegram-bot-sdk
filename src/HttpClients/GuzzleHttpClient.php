@@ -47,7 +47,7 @@ class GuzzleHttpClient implements HttpClientInterface
      */
     public function __destruct()
     {
-        Promise\unwrap(self::$promises);
+        Promise\Utils::unwrap(self::$promises);
     }
 
     /**
@@ -88,7 +88,7 @@ class GuzzleHttpClient implements HttpClientInterface
             }
         } catch (GuzzleException $e) {
             $response = null;
-            if ($e instanceof RequestExceptionInterface || $e instanceof RequestException) {
+            if ($e instanceof RequestException) {
                 $response = $e->getResponse();
             }
 
